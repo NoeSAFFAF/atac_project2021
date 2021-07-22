@@ -3,7 +3,7 @@
 Crawl into the Dungeon is an interactive dungeon defined with a linked data environment and hosted by a linked data platform (Apache Jena Fuseki)
 It uses the LinkedDataFuSpider artifact to make CRUD requests and fetch resources over a custom dungeon environment like rooms, doors and items.
 
-To have a good understanding on what the Crawl into the Dungeon project is about, read the PDF presentation file located on the root project
+To have a good understanding on what the Crawl into the Dungeon project is about, read the PDF presentation file located on the root project.
 
 
 ## Getting started
@@ -26,7 +26,7 @@ You can also add the dataset manually with the TTL file reprensenting our dungeo
 
 To install Hypermedea that contains the LinkedDataFuSpider extension our agent needs.
 
-To generate a release from source, clone the source code of the project [hypermedia-JaCaMo](https://gitlab.emse.fr/noe.saffaf/hypermedia-jacamo/) named Hypermedea, and run `gradle install` in the root directory and make sure the project is being properly published to maven local as it will the dependency we will use in our "Crawl into the dungeon project".
+To generate a release from source, clone the source code of the project [hypermedia-JaCaMo](https://gitlab.emse.fr/noe.saffaf/hypermedia-jacamo/) named Hypermedea, and run `gradle install` in the root directory and make sure the project is being properly published to maven local as it will the dependency we will use in our "Crawl into the Dungeon" project.
 
 You can have a look at how the LinkedDataFuSpider extension works at `examples/ldfu-spider/`.
 
