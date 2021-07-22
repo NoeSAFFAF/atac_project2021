@@ -1,0 +1,58 @@
+@prefix :       <http://base/#> .
+@prefix fuseki: <http://jena.apache.org/fuseki#> .
+@prefix ja:     <http://jena.hpl.hp.com/2005/11/Assembler#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tdb:    <http://jena.hpl.hp.com/2008/tdb#> .
+
+<http://jena.apache.org/2016/tdb#GraphTDB>
+        rdfs:subClassOf  ja:Model .
+
+ja:ModelRDFS  rdfs:subClassOf  ja:Model .
+
+ja:RDFDatasetSink  rdfs:subClassOf  ja:RDFDataset .
+
+tdb:DatasetTDB  rdfs:subClassOf  ja:RDFDataset .
+
+<http://jena.apache.org/2016/tdb#GraphTDB2>
+        rdfs:subClassOf  ja:Model .
+
+<http://jena.apache.org/text#TextDataset>
+        rdfs:subClassOf  ja:RDFDataset .
+
+ja:RDFDatasetZero  rdfs:subClassOf  ja:RDFDataset .
+
+:service_tdb_all  rdf:type            fuseki:Service ;
+        rdfs:label                    "TDB dataLdfu" ;
+        fuseki:dataset                :tdb_dataset_readwrite ;
+        fuseki:name                   "dataLdfu" ;
+        fuseki:serviceQuery           "query" , "" , "sparql" ;
+        fuseki:serviceReadGraphStore  "get" ;
+        fuseki:serviceReadWriteGraphStore
+                "data" ;
+        fuseki:serviceUpdate          "" , "update" ;
+        fuseki:serviceUpload          "upload" .
+
+ja:ViewGraph  rdfs:subClassOf  ja:Model .
+
+ja:GraphRDFS  rdfs:subClassOf  ja:Model .
+
+<http://jena.apache.org/2016/tdb#DatasetTDB>
+        rdfs:subClassOf  ja:RDFDataset .
+
+tdb:GraphTDB  rdfs:subClassOf  ja:Model .
+
+ja:DatasetTxnMem  rdfs:subClassOf  ja:RDFDataset .
+
+<http://jena.apache.org/2016/tdb#DatasetTDB2>
+        rdfs:subClassOf  ja:RDFDataset .
+
+ja:RDFDatasetOne  rdfs:subClassOf  ja:RDFDataset .
+
+ja:MemoryDataset  rdfs:subClassOf  ja:RDFDataset .
+
+:tdb_dataset_readwrite
+        rdf:type      tdb:DatasetTDB ;
+        tdb:location  "C:\\Stage_LinkedDataFu\\code\\apache-jena-fuseki-4.1.0\\run/databases/dataLdfu" .
+
+ja:DatasetRDFS  rdfs:subClassOf  ja:RDFDataset .

@@ -1,0 +1,8 @@
+mas ldfu_mas {
+    agent dungeon_adventurer
+
+    //to comment if you want to look for the solution yourself
+    agent sol_controller_agent
+
+    asl-path: src/agt/base, src/agt/
+}

@@ -1,0 +1,191 @@
+@prefix : <http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#> .
+
+<http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasItem
+:hasItem rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Room ;
+         rdfs:range :Item ;
+         rdfs:comment "The item in the room"^^rdfs:Literal ;
+         rdfs:label "hasItem"^^rdfs:Literal .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasConnectedRoom
+:hasConnectedRoom rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  owl:inverseOf :hasConnection ;
+                  rdfs:domain :Door ;
+                  rdfs:range :Room ;
+                  rdfs:comment "The connected room to the connector"^^rdfs:Literal ;
+                  rdfs:label "hasConnectedRoom"^^rdfs:Literal .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasConnection
+:hasConnection rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :Room ;
+               rdfs:range :Door ;
+               rdfs:comment "A connection a room has"^^rdfs:Literal ;
+               rdfs:label "hasConnection"^^rdfs:Literal .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasInteractibleConnector
+:hasInteractibleConnector rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf owl:topObjectProperty ;
+                          owl:inverseOf :hasInteractibleKey ;
+                          rdfs:domain :Key ;
+                          rdfs:range :Door ;
+                          rdfs:comment "The connector that can interact with a key"^^rdfs:Literal ;
+                          rdfs:label "hasInteractibleConnector"^^rdfs:Literal .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasInteractibleKey
+:hasInteractibleKey rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain :Door ;
+                    rdfs:range :Key ;
+                    rdfs:comment "The key for which the connector can interact"^^rdfs:Literal ;
+                    rdfs:label "hasInteractibleKey"^^rdfs:Literal .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasLivingIn
+:hasLivingIn rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf :isInRoom ;
+             rdfs:domain :Room ;
+             rdfs:range :Living ;
+             rdfs:comment "A living inside the room"^^rdfs:Literal ;
+             rdfs:label "hasLivingIn"^^rdfs:Literal .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#isInRoom
+:isInRoom rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :Living ;
+          rdfs:range :Room ;
+          rdfs:comment "The room for which the living is inside of"^^rdfs:Literal ;
+          rdfs:label "isInRoom"^^rdfs:Literal .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Artifact
+:Artifact rdf:type owl:Class ;
+          rdfs:subClassOf :Utility .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Bow
+:Bow rdf:type owl:Class ;
+     rdfs:subClassOf :Weapon .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Connection
+:Door rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasInteractibleKey ;
+                              owl:someValuesFrom :Key
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasConnectedRoom ;
+                              owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Room
+                            ] .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Door
+:Door rdf:type owl:Class ;
+      rdfs:subClassOf :Door .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Food
+:Food rdf:type owl:Class ;
+      rdfs:subClassOf :Utility .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Human
+:Human rdf:type owl:Class ;
+       rdfs:subClassOf :Living .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Item
+:Item rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Key
+:Key rdf:type owl:Class ;
+     rdfs:subClassOf :Utility ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasInteractibleConnector ;
+                       owl:someValuesFrom :Door
+                     ] .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Living
+:Living rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :isInRoom ;
+                          owl:someValuesFrom :Room
+                        ] .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Location
+:Location rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasConnection ;
+                            owl:someValuesFrom :Door
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasLivingIn ;
+                            owl:someValuesFrom :Living
+                          ] .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Monster
+:Monster rdf:type owl:Class ;
+         rdfs:subClassOf :Living .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Potion
+:Potion rdf:type owl:Class ;
+        rdfs:subClassOf :Utility .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Room
+:Room rdf:type owl:Class ;
+      rdfs:subClassOf :Location .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Spear
+:Spear rdf:type owl:Class ;
+       rdfs:subClassOf :Weapon .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Sword
+:Sword rdf:type owl:Class ;
+       rdfs:subClassOf :Weapon .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Utility
+:Utility rdf:type owl:Class ;
+         rdfs:subClassOf :Item .
+
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Weapon
+:Weapon rdf:type owl:Class ;
+        rdfs:subClassOf :Item .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
