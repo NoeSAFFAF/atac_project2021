@@ -2,7 +2,7 @@
 # Crawl to the Dungeon 
 
 Crawl to the Dungeon is an interactive dungeon defined with a linked data environment and hosted by a linked data platform (Apache Jena Fuseki)
-It uses the LinkedDataFuSpider artifact to make CRUD requests and fetch resources over a custom dungeon environment like rooms, doors, and items,
+It uses the LinkedDataFuSpider artifact to make CRUD requests and fetch resources over a custom dungeon environment like rooms, doors and items.
 
 To have a good understanding on what the Crawl into the Dungeon project is about, read the PDF presentation file located on the root project
 
