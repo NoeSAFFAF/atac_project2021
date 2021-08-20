@@ -9,8 +9,6 @@ apply plugin: 'java'
 version '0.1'
 group   'org.jacamo'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -20,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.hypermedea', name: 'hypermedia-jacamo', version: '0.1'
+    implementation group: 'org.hypermedea', name: 'hypermedea', version: '0.1'
 }
 
 sourceSets {

@@ -1,6 +1,9 @@
 /build/
 /.gradle/
 /presentation/*
+/ATAC2021/*
+ATAC2021.pdf
+ATAC2021.zip
 
 ##Main
 /.gradle/
