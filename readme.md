@@ -8,31 +8,36 @@ To have a good understanding on what the Crawl into the Dungeon project is about
 
 ## Getting started
 
+Prequesite : 
+JVM 8 or more.
+Gradle
+				
 ### Install the Linked-Data Platform
 
-Before running our main project, we need to setup our Linked-Data environment. First download [Apache Jena Fuseki](https://jena.apache.org/download/index.cgi), a platform provides REST-style interaction with our RDF data defining our dungeon.
+Before starting with the main project, we need to setup our Linked-Data environment. First download [Apache Jena Fuseki](https://jena.apache.org/download/index.cgi), a platform provides REST-style interaction with our RDF data modeling our dungeon, it doesn't need to be located in the main project's repository.
 
-Follow the instructions for its installation on a standalone serveur. In the Fuseki repository, you can run by clicking on the executable the server. We will use the default configuration that will run the server on http://localhost:3030/.
-Run the server a first time, and try to open on your web browser http://localhost:3030/.
+Follow the Apache Jena Fuseki's instructions to run it as a standalone server. You can simply run the executable jar in or use the command-line interface. We will use the default configuration that will run the server on http://localhost:3030/.
+Run the server and try to open on your web browser http://localhost:3030/ to check that it is currently running.
 
-Now the server is on, but we need to add our dataset named `alacDungeon`. Close the server app and copy both configuration and databases folder in `atac_project/AJF_data/` into the directory `/run` of your apache jena fuseki repository.
-If you rerun Apache Jena Fuseki, you will see that two datasets were added, with one of them named `alacDungeon`.
+Now the server is on, but we need to add our dataset named `atacDungeon`. In the Web Server GUI interface, go to "manage datasets", then "add new datasets", type `atacDungeon` and mark "Persistant (TBD2)", then "create Dataset".
 
-To make sure everything works, http://localhost:3030/alacDungeon?graph=room1 to see if we can get access to the data of our first room of the dungeon.
+You now have an empty dataset that you need to fill. Hopefully, there is a gradle task that will automatically upload all the RDF graphs into our Linked-Data platform. Clone this main project if not done yet, and run the gradle command `gradle runLoadGraph`, it will automatically add all the triples from the ttl files in /graph/.
 
-You can also add the dataset manually with the TTL file reprensenting our dungeon in `/graph` (by ensuring adding every triples of a ttl file goes into a named graph of the same name) using the Apache Jena Fuseki UI interface, 
+To make sure everything works, http://localhost:3030/atacDungeon?graph=room1 to see if the server returns the data of our first room of the dungeon.
+
+In case that didn't work, you can also add the dataset manually with the TTL file reprensenting our dungeon in `/graph` (by ensuring adding every triples of a ttl file goes into a named graph of the same name) using the Apache Jena Fuseki UI interface, 
 
 ### Install Hypermedea
 
-To install Hypermedea that contains the LinkedDataFuSpider extension our agent needs.
+Hypermedea is a software extension using Cartago technology for MAS systems that contains the LinkedDataFuSpider artifact our agent from our JaCaMo framework can use for hypermedea appliances.
 
-To generate a release from source, clone the source code of the project [hypermedia-JaCaMo](https://gitlab.emse.fr/noe.saffaf/hypermedia-jacamo/) named Hypermedea, and run `gradle install` in the root directory and make sure the project is being properly published to maven local as it will the dependency we will use in our "Crawl into the Dungeon" project.
+To generate a release from source, clone the source code of the project [hypermedia-JaCaMo](https://gitlab.emse.fr/noe.saffaf/hypermedia-jacamo/) named Hypermedea, and run `gradle publishToMavenLocal` in the root directory. Make sure the project is being properly published to maven local by looking at your local maven repository (Refer to maven documentation if necessary).
 
-You can have a look at how the LinkedDataFuSpider extension works at `examples/ldfu-spider/`.
+You can also have a look at how the LinkedDataFuSpider extension works at `examples/ldfu-spider/` in the hypermedea project.
 
 ### Install Crawl Into the Dungeon
 
-Finally, clone this project if not done yet, and run `gradle install` in the root directory, then run the gradle task named `runDungeon`. Again, make sure that the dependency org.hypermedea is being properly installed.
+Finally, in the main project, run `gradle runDungeon` to run the project. You should see a GUI interface appears. If not, make sure that the dependency org.hypermedea is being properly installed.
 
 
 ## How to navigate into the dungeon
@@ -49,7 +54,7 @@ Initially, the agent wait action from a source, and the project also has a solut
 
 
 ## Acknowledgment
-Thanks to Victor Charpenay for developping along myself the LinkedDataFuSpider artifact.
+Thanks to Victor Charpenay for developing along myself the LinkedDataFuSpider artifact.
 
 ## Contact
 Noé SAFFAF (said.1997@hotmail.fr)

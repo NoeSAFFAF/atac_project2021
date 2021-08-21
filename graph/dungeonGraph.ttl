@@ -1,7 +1,7 @@
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dg: <http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#> .
-@prefix dgg: <http://www.localhost:3030/alacDungeon?graph=> .
+@prefix dgg: <http://www.localhost:3030/atacDungeon?graph=> .
 
 <Room1> {
     dgg:Room1 rdf:type dg:Room ;

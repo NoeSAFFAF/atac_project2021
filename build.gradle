@@ -12,6 +12,7 @@ group   'org.jacamo'
 
 repositories {
     mavenCentral()
+    maven { url "https://mvnrepository.com/artifact/org.apache.jena/apache-jena"}
     maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
     maven { url 'https://paul.ti.rw.fau.de/maven/repository/' }
     mavenLocal()
@@ -19,6 +20,8 @@ repositories {
 
 dependencies {
     implementation group: 'org.hypermedea', name: 'hypermedea', version: '0.1'
+    implementation group: 'org.apache.jena', name: 'apache-jena', version: '3.1.0'
+    implementation group: 'org.apache.jena', name: 'jena-rdfconnection', version: '4.1.0'
 }
 
 sourceSets {
@@ -33,6 +36,13 @@ sourceSets {
             srcDir 'src/resources'
         }
     }
+}
+
+task runLoadGraph (type: JavaExec, dependsOn: 'classes') {
+    group 'JavaApacheGraph'
+    description 'Automate the graph loading into apache jena fuseki'
+    main = 'loader.GraphLoader'
+    classpath sourceSets.main.runtimeClasspath
 }
 
 task runDungeon (type: JavaExec, dependsOn: 'classes') {

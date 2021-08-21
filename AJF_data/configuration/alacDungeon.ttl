@@ -22,9 +22,9 @@ tdb2:GraphTDB2  rdfs:subClassOf  ja:Model .
 ja:RDFDatasetZero  rdfs:subClassOf  ja:RDFDataset .
 
 :service_tdb_all  rdf:type            fuseki:Service ;
-        rdfs:label                    "TDB2 alacDungeon" ;
+        rdfs:label                    "TDB2 atacDungeon" ;
         fuseki:dataset                :tdb_dataset_readwrite ;
-        fuseki:name                   "alacDungeon" ;
+        fuseki:name                   "atacDungeon" ;
         fuseki:serviceQuery           "query" , "" , "sparql" ;
         fuseki:serviceReadGraphStore  "get" ;
         fuseki:serviceReadWriteGraphStore
@@ -51,6 +51,6 @@ ja:MemoryDataset  rdfs:subClassOf  ja:RDFDataset .
 
 :tdb_dataset_readwrite
         rdf:type       tdb2:DatasetTDB2 ;
-        tdb2:location  "C:\\Stage_LinkedDataFu\\code\\apache-jena-fuseki-4.1.0\\run/databases/alacDungeon" .
+        tdb2:location  "C:\\Stage_LinkedDataFu\\code\\apache-jena-fuseki-4.1.0\\run/databases/atacDungeon" .
 
 ja:DatasetRDFS  rdfs:subClassOf  ja:RDFDataset .

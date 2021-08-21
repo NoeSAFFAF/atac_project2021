@@ -3,8 +3,8 @@
 * This file describes the behavior of a adventurer agent in a dungeon. It uses the artifact
 * LinkedDataFuSpider to navigate through resources on a linked-data platform. The platform
 * used in apache Jena Fuseki with the root iri of our dungeon environment
-* "http://localhost:3030/alacDungeon" and our agent starts at room1 (described as
-* http://localhost:3030/alacDungeon?graph=room1). Through several actions defined as plans
+* "http://localhost:3030/atacDungeon" and our agent starts at room1 (described as
+* http://localhost:3030/atacDungeon?graph=room1). Through several actions defined as plans
 * the agent can navigate through the dungeon and interact with its environment through
 * CRUD requests made by the artifact. To understand how the artifact works, please look
 * at the source code or at the example project.
@@ -23,7 +23,7 @@
 */
 
 //The IRI namespace of our dungeon environment
-rootEnvUri("http://localhost:3030/alacDungeon?graph=").
+rootEnvUri("http://localhost:3030/atacDungeon?graph=").
 
 !start.
 
