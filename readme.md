@@ -27,6 +27,8 @@ To make sure everything works, http://localhost:3030/atacDungeon?graph=room1 to 
 
 In case that didn't work, you can also add the dataset manually with the TTL file reprensenting our dungeon in `/graph` (by ensuring adding every triples of a ttl file goes into a named graph of the same name) using the Apache Jena Fuseki UI interface, 
 
+Note : if compiling dependencies fails (which may happen), run the uberJar instead of gradle runLoadGraph with `java -jar build/libs/GraphLoader-0.1.jar`.
+
 ### Install Hypermedea
 
 Hypermedea is a software extension using Cartago technology for MAS systems that contains the LinkedDataFuSpider artifact our agent from our JaCaMo framework can use for hypermedea appliances.
@@ -38,7 +40,7 @@ You can also have a look at how the LinkedDataFuSpider extension works at `examp
 ### Install Crawl Into the Dungeon
 
 Finally, in the main project, run `gradle runDungeon` to run the project. You should see a GUI interface appears. If not, make sure that the dependency org.hypermedea is being properly installed.
-
+Note : Same if compiling fails, run the uberJar instead of gradle runDungeon with `java -jar build/libs/dungeonAdventurer-0.1.jar dungeon.jcm`.
 
 ## How to navigate into the dungeon
 
