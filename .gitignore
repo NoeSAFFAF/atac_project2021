@@ -8,7 +8,6 @@ ATAC2021.zip
 ##Main
 /.gradle/
 /.idea/
-/build/
 /log/
 gradlew
 gradlew.bat
