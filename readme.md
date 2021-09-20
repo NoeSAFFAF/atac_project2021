@@ -1,4 +1,3 @@
-a
 # Crawl to the Dungeon 
 
 Crawl into the Dungeon is an interactive dungeon defined with a linked data environment and hosted by a linked data platform (Apache Jena Fuseki)
