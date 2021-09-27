@@ -13,6 +13,7 @@ group   'org.jacamo'
 
 repositories {
     mavenCentral()
+    maven { url "https://mvnrepository.com/artifact/org.apache.jena/jena-fuseki"}
     maven { url "https://mvnrepository.com/artifact/org.apache.jena/apache-jena"}
     maven { url "https://raw.github.com/jacamo-lang/mvn-repo/master" }
     maven { url 'https://paul.ti.rw.fau.de/maven/repository/' }
@@ -20,9 +21,21 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.hypermedea', name: 'hypermedea', version: '0.1'
-    compile group: 'org.apache.jena', name: 'apache-jena', version: '3.1.0'
-    compile group: 'org.apache.jena', name: 'jena-rdfconnection', version: '4.1.0'
+    implementation group: 'org.jacamo', name: 'jacamo', version: '0.9'
+    implementation group: 'edu.kit.aifb.linkeddatafu', name: 'linked-data-fu-standalone', version: '0.9.12'
+
+    implementation group: 'net.sourceforge.owlapi', name: 'org.semanticweb.hermit', version: '1.4.5.519'
+    implementation group: 'com.github.galigator.openllet', name: 'openllet-owlapi', version: '2.6.5'
+    implementation group: 'net.sourceforge.owlapi', name: 'jfact', version: '5.0.3'
+
+    // TODO include newer version of wot-td-java
+    implementation group: 'ch.unisg.ics.interactions', name: 'wot-td-java', version: '0.0.1'
+    implementation fileTree(dir: 'lib', include: 'pddl4j-*.jar')
+    implementation fileTree(dir: 'lib', include: 'openllet-owlapi-2.6.5.jar')
+
+    implementation group: 'org.apache.jena', name: 'jena-fuseki-main', version: '4.2.0'
+    implementation group: 'org.apache.jena', name: 'jena-rdfconnection', version: '4.1.0'
+    implementation fileTree(dir: 'libs', include: '*.jar')
 }
 
 sourceSets {
@@ -40,16 +53,14 @@ sourceSets {
 }
 
 
-task dungeonJar(type: Jar, dependsOn: 'classes') {
-    group      'JaCaMo'
-    description 'creates a single runnable jar file with all dependencies'
-
+task dungeonJar(type: Jar) {
+    group 'CrawlIntoTheDungeon'
     manifest {
-        attributes 'Main-Class': 'jacamo.infra.JaCaMoLauncher'
+        attributes 'Main-Class': 'runner.RunnerCITDProject'
     }
-    baseName = 'dungeonAdventurer' // the name must start with jacamo so that jacamo...jar is found in the classpath
+    baseName = "RunnerCITDProject"
     from {
-        (configurations.compile.findAll { !it.path.endsWith(".pom") }).collect {
+        (configurations.implmentation.findAll { !it.path.endsWith(".pom") }).collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
@@ -59,57 +70,18 @@ task dungeonJar(type: Jar, dependsOn: 'classes') {
         include '**/*.jcm'
         include '*.properties'
     }
-    from (project.buildDir.absolutePath + '/jcm') {
-        include '**/*'
-    }
-    with jar
-    exclude "META-INF/*.SF"
-    exclude "META-INF/*.DSA"
-    exclude "META-INF/*.RSA"
 
-
-    doFirst {
-        copy {
-            from 'ai4industry_jacamo.jcm'
-            rename 'ai4industry_jacamo.jcm','default.jcm'
-            into project.buildDir.absolutePath + '/jcm'
-        }
-    }
-}
-
-
-task graphLoaderJar(type: Jar) {
-    group 'JavaApacheGraph'
-    manifest {
-        attributes 'Main-Class': 'loader.GraphLoader'
-    }
-    baseName = "GraphLoader"
-    from {
-        (configurations.compile.findAll { !it.path.endsWith(".pom") }).collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
+    zip64 = true
     exclude "META-INF/*.SF"
     exclude "META-INF/*.DSA"
     exclude "META-INF/*.RSA"
     with jar
-}
-
-task runLoadGraph (type: JavaExec, dependsOn: 'classes') {
-    group 'JavaApacheGraph'
-    description 'Automate the graph loading into apache jena fuseki'
-    main = 'loader.GraphLoader'
-    classpath sourceSets.main.runtimeClasspath
 }
 
 task runDungeon (type: JavaExec, dependsOn: 'classes') {
-    group 'JaCaMo'
-    description 'runs the Dungeon simulation'
-    doFirst {
-        mkdir 'log'
-    }
-    main 'jacamo.infra.JaCaMoLauncher'
-    args 'dungeon.jcm'
+    group 'CrawlIntoTheDungeon'
+    description 'Create a Apache Jena Fuseki Server, load the graph and run the Dungeon simulation'
+    main = 'runner.RunnerCITDProject'
     classpath sourceSets.main.runtimeClasspath
 }
 

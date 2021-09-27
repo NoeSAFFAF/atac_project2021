@@ -12,15 +12,6 @@
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasItem
-:hasItem rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf owl:topObjectProperty ;
-         rdfs:domain :Room ;
-         rdfs:range :Item ;
-         rdfs:comment "The item in the room"^^rdfs:Literal ;
-         rdfs:label "hasItem"^^rdfs:Literal .
-
-
 ###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasConnectedRoom
 :hasConnectedRoom rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf owl:topObjectProperty ;
@@ -59,6 +50,15 @@
                     rdfs:label "hasInteractibleKey"^^rdfs:Literal .
 
 
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasItem
+:hasItem rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Room ;
+         rdfs:range :Item ;
+         rdfs:comment "The item in the room"^^rdfs:Literal ;
+         rdfs:label "hasItem"^^rdfs:Literal .
+
+
 ###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#hasLivingIn
 :hasLivingIn rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
@@ -79,6 +79,17 @@
 
 
 #################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#needsKey
+:needsKey rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :Door ;
+          rdfs:range xsd:boolean .
+
+
+#################################################################
 #    Classes
 #################################################################
 
@@ -93,21 +104,25 @@
 
 
 ###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Connection
-:Door rdf:type owl:Class ;
-            rdfs:subClassOf [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasInteractibleKey ;
-                              owl:someValuesFrom :Key
-                            ] ,
-                            [ rdf:type owl:Restriction ;
-                              owl:onProperty :hasConnectedRoom ;
-                              owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-                              owl:onClass :Room
-                            ] .
+:Connection rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Door
 :Door rdf:type owl:Class ;
-      rdfs:subClassOf :Door .
+      rdfs:subClassOf :Connection ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasInteractibleKey ;
+                        owl:someValuesFrom :Key
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasConnectedRoom ;
+                        owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Room
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :needsKey ;
+                        owl:someValuesFrom xsd:boolean
+                      ] .
 
 
 ###  http://www.semanticweb.org/noesaffaf/ontologies/2021/6/dungeon#Food
